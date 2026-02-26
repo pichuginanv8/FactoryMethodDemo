@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using FactoryMethodDemo.Models;
 
+//привет
 namespace FactoryMethodDemo.Creators
 {
     public abstract class TriangleCreator
