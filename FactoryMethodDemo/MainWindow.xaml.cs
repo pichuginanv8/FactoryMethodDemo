@@ -1,20 +1,40 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using FactoryMethodDemo.Creators;
-using FactoryMethodDemo.Models;
-//халлоу
-namespace FactoryMethodDemo
+using AbstractFactoryDemo.Factories;
+
+namespace AbstractFactoryDemo
 {
     public partial class MainWindow : Window
     {
+        private IFigureFactory _currentFactory;
+
         public MainWindow()
         {
             InitializeComponent();
+            _currentFactory = new RedFactory();
             UpdateFigures();
         }
 
         private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var selectedItem = ColorComboBox.SelectedItem as ComboBoxItem;
+            if (selectedItem == null) return;
+
+            switch (selectedItem.Content.ToString())
+            {
+                case "Красный":
+                    _currentFactory = new RedFactory();
+                    break;
+                case "Синий":
+                    _currentFactory = new BlueFactory();
+                    break;
+                case "Зелёный":
+                    _currentFactory = new GreenFactory();
+                    break;
+                default:
+                    return;
+            }
+
             UpdateFigures();
         }
 
@@ -24,37 +44,9 @@ namespace FactoryMethodDemo
 
             FiguresPanel.Children.Clear();
 
-            var selectedItem = ColorComboBox.SelectedItem as ComboBoxItem;
-            if (selectedItem == null) return;
-
-            CircleCreator circleCreator;
-            SquareCreator squareCreator;
-            TriangleCreator triangleCreator;
-
-            switch (selectedItem.Content.ToString())
-            {
-                case "Красный":
-                    circleCreator = new RedCircleCreator();
-                    squareCreator = new RedSquareCreator();
-                    triangleCreator = new RedTriangleCreator();
-                    break;
-                case "Синий":
-                    circleCreator = new BlueCircleCreator();
-                    squareCreator = new BlueSquareCreator();
-                    triangleCreator = new BlueTriangleCreator();
-                    break;
-                case "Зелёный":
-                    circleCreator = new GreenCircleCreator();
-                    squareCreator = new GreenSquareCreator();
-                    triangleCreator = new GreenTriangleCreator();
-                    break;
-                default:
-                    return;
-            }
-
-            FiguresPanel.Children.Add(circleCreator.CreateCircle().CreateUIElement());
-            FiguresPanel.Children.Add(squareCreator.CreateSquare().CreateUIElement());
-            FiguresPanel.Children.Add(triangleCreator.CreateTriangle().CreateUIElement());
+            FiguresPanel.Children.Add(_currentFactory.CreateCircle().CreateUIElement());
+            FiguresPanel.Children.Add(_currentFactory.CreateSquare().CreateUIElement());
+            FiguresPanel.Children.Add(_currentFactory.CreateTriangle().CreateUIElement());
         }
     }
 }
