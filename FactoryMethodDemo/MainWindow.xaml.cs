@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using FactoryMethodDemo.Creators;
 using FactoryMethodDemo.Models;
-
+//халлоу
 namespace FactoryMethodDemo
 {
     public partial class MainWindow : Window
