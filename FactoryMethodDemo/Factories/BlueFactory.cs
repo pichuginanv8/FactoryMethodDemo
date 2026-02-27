@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using AbstractFactoryDemo.Models;
+using FactoryMethodDemo.Models;
+using AbstractFactoryDemo.Factories;
 
 namespace AbstractFactoryDemo.Factories
 {

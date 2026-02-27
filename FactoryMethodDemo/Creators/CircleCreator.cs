@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using FactoryMethodDemo.Models;
+using System.Windows.Media; // Добавьте эту строку
 
 namespace FactoryMethodDemo.Creators
 {
+    // абстрактный создатель для кругов
     public abstract class CircleCreator
     {
         public abstract Circle CreateCircle();

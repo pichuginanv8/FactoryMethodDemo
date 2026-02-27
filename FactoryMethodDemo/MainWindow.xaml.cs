@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using AbstractFactoryDemo.Factories;
+using System.Windows.Media; // Добавьте если используете Colors где-то
 
 namespace AbstractFactoryDemo
 {
@@ -10,9 +11,9 @@ namespace AbstractFactoryDemo
 
         public MainWindow()
         {
-            InitializeComponent();
-            _currentFactory = new RedFactory();
-            UpdateFigures();
+            InitializeComponent(); // ВАЖНО: сначала инициализация компонентов
+            _currentFactory = new RedFactory(); // По умолчанию
+            UpdateFigures(); // Теперь можно обращаться к FiguresPanel
         }
 
         private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -20,6 +21,7 @@ namespace AbstractFactoryDemo
             var selectedItem = ColorComboBox.SelectedItem as ComboBoxItem;
             if (selectedItem == null) return;
 
+            // Выбираем фабрику в зависимости от цвета
             switch (selectedItem.Content.ToString())
             {
                 case "Красный":
@@ -40,10 +42,13 @@ namespace AbstractFactoryDemo
 
         private void UpdateFigures()
         {
+            // Проверка на случай, если метод вызван до инициализации
             if (FiguresPanel == null) return;
 
+            // Очищаем панель
             FiguresPanel.Children.Clear();
 
+            // Создаём фигуры через текущую фабрику
             FiguresPanel.Children.Add(_currentFactory.CreateCircle().CreateUIElement());
             FiguresPanel.Children.Add(_currentFactory.CreateSquare().CreateUIElement());
             FiguresPanel.Children.Add(_currentFactory.CreateTriangle().CreateUIElement());

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AbstractFactoryDemo.Models;
+using FactoryMethodDemo.Models; // Переиспользуем те же модели
 
 namespace AbstractFactoryDemo.Factories
 {

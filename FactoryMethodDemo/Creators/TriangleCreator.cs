@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using FactoryMethodDemo.Models;
+using System.Windows.Media; // Добавьте эту строку
 
-//привет
 namespace FactoryMethodDemo.Creators
 {
+    // абстрактный создатель для треугольников
     public abstract class TriangleCreator
     {
         public abstract Triangle CreateTriangle();
